@@ -1,401 +1,350 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, user-scalable=yes">
-    <title>Arman Rahman | Miner & Bot Dev</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,600;14..32,700;14..32,800&display=swap" rel="stylesheet">
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            background: radial-gradient(circle at 30% 10%, #0b0e16, #020408);
-            font-family: 'Inter', sans-serif;
-            color: #eef5ff;
-            line-height: 1.4;
-            padding: 16px;
-        }
-
-        /* main container – mobile first */
-        .container {
-            max-width: 560px;
-            margin: 0 auto;
-        }
-
-        /* smooth glassmorphism */
-        .card {
-            background: rgba(18, 25, 40, 0.65);
-            backdrop-filter: blur(16px);
-            border-radius: 36px;
-            border: 1px solid rgba(240, 185, 11, 0.25);
-            padding: 1.5rem;
-            margin-bottom: 1.2rem;
-            transition: all 0.2s ease;
-            box-shadow: 0 15px 35px rgba(0,0,0,0.3);
-        }
-
-        .card:active {
-            transform: scale(0.99);
-        }
-
-        /* animated gradient text */
-        .gradient-text {
-            background: linear-gradient(125deg, #FFE55C, #FFA84C, #FF6B4A);
-            background-size: 200% auto;
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
-            animation: shimmer 2.5s linear infinite;
-        }
-
-        @keyframes shimmer {
-            0% { background-position: 0% 50%; }
-            100% { background-position: 200% 50%; }
-        }
-
-        /* profile row */
-        .profile-header {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            flex-wrap: wrap;
-            justify-content: space-between;
-            margin-bottom: 1rem;
-        }
-
-        .badge {
-            background: rgba(0,0,0,0.5);
-            border-radius: 100px;
-            padding: 6px 14px;
-            font-size: 0.75rem;
-            font-weight: 500;
-            backdrop-filter: blur(5px);
-            display: inline-flex;
-            align-items: center;
-            gap: 6px;
-        }
-
-        .stat-grid {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 12px;
-            margin: 1.2rem 0;
-        }
-
-        .stat-pill {
-            background: #0f111ecc;
-            border-radius: 2rem;
-            padding: 8px 16px;
-            font-size: 0.85rem;
-            font-weight: 500;
-            border-left: 3px solid #f0b90b;
-            backdrop-filter: blur(4px);
-            flex: 1 0 auto;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-
-        .section-title {
-            font-size: 1.55rem;
-            font-weight: 700;
-            margin: 0.8rem 0 0.8rem 0;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-
-        /* mining cards - modern */
-        .mining-item {
-            background: rgba(0, 0, 0, 0.4);
-            border-radius: 28px;
-            padding: 0.8rem 1rem;
-            margin-bottom: 0.8rem;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            flex-wrap: wrap;
-            transition: 0.2s;
-            border: 1px solid rgba(240,185,11,0.2);
-        }
-
-        .mining-left {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            flex-wrap: wrap;
-        }
-
-        .coin-name {
-            font-weight: 700;
-            font-size: 1rem;
-        }
-
-        .profit {
-            font-weight: 800;
-            color: #f7d44a;
-            letter-spacing: -0.2px;
-        }
-
-        .eligible-badge {
-            background: #2a2f3f;
-            border-radius: 40px;
-            padding: 4px 12px;
-            font-size: 0.7rem;
-            font-weight: 500;
-        }
-
-        /* bot list clickable */
-        .bot-grid {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 12px;
-            margin: 16px 0 8px;
-        }
-
-        .bot-link {
-            background: #0f1722;
-            padding: 12px 20px;
-            border-radius: 60px;
-            text-decoration: none;
-            color: #f0f3fa;
-            font-weight: 600;
-            font-size: 0.9rem;
-            display: inline-flex;
-            align-items: center;
-            gap: 10px;
-            border: 1px solid #2a3440;
-            transition: 0.15s;
-            backdrop-filter: blur(5px);
-            flex: 1 0 auto;
-            justify-content: center;
-        }
-
-        .bot-link:active {
-            background: #f0b90b;
-            color: #0a0c10;
-            transform: scale(0.96);
-            border-color: #f0b90b;
-        }
-
-        .social-row {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 12px;
-            justify-content: center;
-            margin-top: 20px;
-        }
-
-        .social-icon {
-            background: #11161f;
-            border-radius: 50px;
-            padding: 8px 18px;
-            text-decoration: none;
-            color: white;
-            font-size: 0.8rem;
-            display: inline-flex;
-            align-items: center;
-            gap: 6px;
-            font-weight: 500;
-            backdrop-filter: blur(4px);
-        }
-
-        .footer-quote {
-            text-align: center;
-            margin-top: 2rem;
-            padding: 1rem;
-            font-size: 0.75rem;
-            border-top: 1px solid #1e2a3a;
-            color: #9aaebf;
-        }
-
-        /* custom click feedback */
-        button, a, .bot-link {
-            cursor: pointer;
-            -webkit-tap-highlight-color: transparent;
-        }
-
-        @media (max-width: 480px) {
-            body { padding: 12px; }
-            .card { padding: 1.2rem; }
-            .section-title { font-size: 1.4rem; }
-        }
-        
-        hr {
-            border-color: #2a3645;
-            margin: 12px 0;
-        }
-        
-        .mini-tag {
-            font-size: 0.7rem;
-            background: #00000040;
-            border-radius: 30px;
-            padding: 2px 10px;
-        }
-    </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Arman Rhaman — Bio</title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;700;800&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
 </head>
 <body>
-<div class="container">
-    <!-- PROFILE CARD -->
-    <div class="card">
-        <div class="profile-header">
-            <h1 style="font-size: 1.9rem; font-weight: 800;"><span class="gradient-text">ARMAN</span> <span style="color:#f0b90b;">RHAMAN</span></h1>
-            <div class="badge"><span>⚡</span> @arman_rhaman</div>
-        </div>
-        <div style="display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 12px;">
-            <span class="badge">🎭 AYMAN</span>
-            <span class="badge">📅 12 Jan</span>
-            <span class="badge">🖤 Black / Islam</span>
-        </div>
-        <div class="stat-grid">
-            <div class="stat-pill">💔 Single ✓ | GF ✓</div>
-            <div class="stat-pill">🏡 Village • Uneducated</div>
-            <div class="stat-pill">⛏️ Crypto Miner 👿</div>
-        </div>
-        <div style="font-style: italic; border-left: 3px solid #f0b90b; padding-left: 12px; margin: 12px 0 0 0; font-size: 0.85rem;">
-            “My enemies are many, my equals are none. In Allah we trust 🗽”
-        </div>
+
+  <!-- Noise Overlay -->
+  <div class="noise"></div>
+
+  <!-- Cursor -->
+  <div class="cursor" id="cursor"></div>
+  <div class="cursor-dot" id="cursorDot"></div>
+
+  <!-- Grid Lines Background -->
+  <div class="grid-bg"></div>
+
+  <!-- Hero Section -->
+  <section class="hero">
+    <div class="hero-tag reveal">Bio Page</div>
+    <h1 class="hero-name reveal">
+      <span class="line">Arman</span>
+      <span class="line accent">Rhaman</span>
+    </h1>
+    <p class="hero-sub reveal">aka <strong>Ayman</strong> &mdash; Crypto Miner &amp; Bot Developer</p>
+
+    <div class="status-bar reveal">
+      <span class="status-item"><i class="fa-solid fa-circle-dot pulse-green"></i> Single</span>
+      <span class="status-item"><i class="fa-solid fa-mosque"></i> Islam</span>
+      <span class="status-item"><i class="fa-solid fa-house"></i> Village</span>
+      <span class="status-item"><i class="fa-solid fa-calendar"></i> Jan 12</span>
     </div>
 
-    <!-- MINING PORTFOLIO – Clean & Card Based -->
-    <div class="card">
-        <div class="section-title">
-            <span>💰</span> <span class="gradient-text">mining chest</span>
-            <span class="mini-tag">real-time</span>
-        </div>
-        
-        <!-- Group 1: NOTCOIN family -->
-        <div class="mining-item">
-            <div class="mining-left"><span class="coin-name">💎 NOTCOIN</span></div>
-            <div class="profit">$1200</div>
-        </div>
-        <div style="margin-left: 1rem; margin-bottom: 0.7rem;">
-            <div style="display: flex; gap: 12px; flex-wrap: wrap; font-size: 0.8rem;"><span>🎮 GAMEE $67</span><span>😀 MOMOAI $5</span><span>🐰 ROCKY RABBIT $3</span><span class="eligible-badge">🐹 HAMSTER ❌</span><span class="eligible-badge">🌱 BLUM ❌</span></div>
-        </div>
+    <div class="social-row reveal">
+      <a href="https://www.facebook.com/arman.n.n.a.a" target="_blank" class="soc-btn" title="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
+      <a href="https://t.me/arman_rhaman" target="_blank" class="soc-btn" title="Telegram"><i class="fa-brands fa-telegram"></i></a>
+      <a href="https://api.whatsapp.com/send?phone=+8801409542658" target="_blank" class="soc-btn" title="WhatsApp"><i class="fa-brands fa-whatsapp"></i></a>
+      <a href="https://www.instagram.com/mr_arman_rhaman" target="_blank" class="soc-btn" title="Instagram"><i class="fa-brands fa-instagram"></i></a>
+      <a href="https://www.threads.com/@mr_arman_rhaman" target="_blank" class="soc-btn" title="Threads"><i class="fa-brands fa-threads"></i></a>
+      <a href="https://x.com/arman_rhaman" target="_blank" class="soc-btn" title="Twitter / X"><i class="fa-brands fa-x-twitter"></i></a>
+      <a href="https://www.tiktok.com/@arman_rhaman" target="_blank" class="soc-btn" title="TikTok"><i class="fa-brands fa-tiktok"></i></a>
+      <a href="https://t.me/seemrbio" target="_blank" class="soc-btn" title="Telegram Channel"><i class="fa-solid fa-satellite-dish"></i></a>
+    </div>
+  </section>
 
-        <div class="mining-item">
-            <div class="mining-left"><span class="coin-name">🐕 DOGS</span></div>
-            <div class="profit">$970</div>
-        </div>
-        <div style="margin-left: 1rem; margin-bottom: 0.7rem;">
-            <div style="display: flex; gap: 12px; flex-wrap: wrap; font-size: 0.8rem;"><span>⭐ WCOIN $400</span><span>🎮 MEMEFI $20</span><span>🏴‍☠️ MEMHASH $1.5</span><span class="eligible-badge">❌ TAPSWAP</span></div>
-        </div>
+  <!-- Divider -->
+  <div class="section-divider reveal"><span>Mining Earnings</span></div>
 
-        <div class="mining-item">
-            <div class="mining-left"><span class="coin-name">🐱 CATS</span></div>
-            <div class="profit">$65</div>
-        </div>
-        <div style="margin-left: 1rem; margin-bottom: 0.7rem;">
-            <div style="display: flex; gap: 12px; flex-wrap: wrap; font-size: 0.8rem;"><span>🍅 TOMARKET $3</span><span>🤑 XEMPIRE $25</span><span>🌱 SEED $12</span></div>
-        </div>
+  <!-- Mining Grid -->
+  <section class="mining-section">
+    <div class="mining-grid" id="miningGrid">
 
-        <div class="mining-item">
-            <div class="mining-left"><span class="coin-name">⭐ MAJOR</span></div>
-            <div class="profit">$1800</div>
-        </div>
-        <div style="margin-left: 1rem; margin-bottom: 0.7rem;">
-            <div style="display: flex; gap: 12px; flex-wrap: wrap; font-size: 0.8rem;"><span>🐕 LOSTDOGS $7</span><span>🥰 MONEY DOGS $6</span></div>
-        </div>
+      <div class="mine-card reveal" style="--i:0">
+        <div class="mine-icon"><i class="fa-solid fa-gem"></i></div>
+        <div class="mine-name">Notcoin</div>
+        <div class="mine-amount">$1200</div>
+      </div>
 
-        <div class="mining-item">
-            <div class="mining-left"><span class="coin-name">😺 CATIZEN</span></div>
-            <div class="profit">$28</div>
+      <div class="mine-card reveal" style="--i:1">
+        <div class="mine-icon"><i class="fa-solid fa-dog"></i></div>
+        <div class="mine-name">Dogs</div>
+        <div class="mine-amount">$970</div>
+      </div>
+
+      <div class="mine-card reveal" style="--i:2">
+        <div class="mine-icon"><i class="fa-solid fa-cat"></i></div>
+        <div class="mine-name">Cats</div>
+        <div class="mine-amount">$65</div>
+      </div>
+
+      <div class="mine-card reveal highlight" style="--i:3">
+        <div class="mine-icon"><i class="fa-solid fa-star"></i></div>
+        <div class="mine-name">Major</div>
+        <div class="mine-amount">$1800</div>
+      </div>
+
+      <div class="mine-card reveal" style="--i:4">
+        <div class="mine-icon"><i class="fa-solid fa-city"></i></div>
+        <div class="mine-name">Catizen</div>
+        <div class="mine-amount">$28</div>
+      </div>
+
+      <div class="mine-card reveal" style="--i:5">
+        <div class="mine-icon"><i class="fa-solid fa-gamepad"></i></div>
+        <div class="mine-name">Gamee</div>
+        <div class="mine-amount">$67</div>
+      </div>
+
+      <div class="mine-card reveal" style="--i:6">
+        <div class="mine-icon"><i class="fa-solid fa-coins"></i></div>
+        <div class="mine-name">Wcoin</div>
+        <div class="mine-amount">$400</div>
+      </div>
+
+      <div class="mine-card reveal" style="--i:7">
+        <div class="mine-icon"><i class="fa-solid fa-store"></i></div>
+        <div class="mine-name">Tomarket</div>
+        <div class="mine-amount">$3</div>
+      </div>
+
+      <div class="mine-card reveal" style="--i:8">
+        <div class="mine-icon"><i class="fa-solid fa-paw"></i></div>
+        <div class="mine-name">Lostdogs</div>
+        <div class="mine-amount">$7</div>
+      </div>
+
+      <div class="mine-card reveal" style="--i:9">
+        <div class="mine-icon"><i class="fa-solid fa-border-all"></i></div>
+        <div class="mine-name">Notpixel</div>
+        <div class="mine-amount">$40</div>
+      </div>
+
+      <div class="mine-card reveal" style="--i:10">
+        <div class="mine-icon"><i class="fa-solid fa-robot"></i></div>
+        <div class="mine-name">Momoai</div>
+        <div class="mine-amount">$5</div>
+      </div>
+
+      <div class="mine-card reveal" style="--i:11">
+        <div class="mine-icon"><i class="fa-solid fa-face-laugh"></i></div>
+        <div class="mine-name">Memefi</div>
+        <div class="mine-amount">$20</div>
+      </div>
+
+      <div class="mine-card reveal" style="--i:12">
+        <div class="mine-icon"><i class="fa-solid fa-crown"></i></div>
+        <div class="mine-name">Xempire</div>
+        <div class="mine-amount">$25</div>
+      </div>
+
+      <div class="mine-card reveal" style="--i:13">
+        <div class="mine-icon"><i class="fa-solid fa-money-bill"></i></div>
+        <div class="mine-name">Money Dogs</div>
+        <div class="mine-amount">$6</div>
+      </div>
+
+      <div class="mine-card reveal" style="--i:14">
+        <div class="mine-icon"><i class="fa-solid fa-spider"></i></div>
+        <div class="mine-name">Catton</div>
+        <div class="mine-amount">$6</div>
+      </div>
+
+      <div class="mine-card reveal" style="--i:15">
+        <div class="mine-icon"><i class="fa-solid fa-seedling"></i></div>
+        <div class="mine-name">Seed</div>
+        <div class="mine-amount">$12</div>
+      </div>
+
+      <div class="mine-card reveal" style="--i:16">
+        <div class="mine-icon"><i class="fa-solid fa-tree"></i></div>
+        <div class="mine-name">Zoo</div>
+        <div class="mine-amount">$3.5</div>
+      </div>
+
+      <div class="mine-card reveal ineligible" style="--i:17">
+        <div class="mine-icon"><i class="fa-solid fa-ban"></i></div>
+        <div class="mine-name">Tapswap</div>
+        <div class="mine-amount">Not Eligible</div>
+      </div>
+
+      <div class="mine-card reveal ineligible" style="--i:18">
+        <div class="mine-icon"><i class="fa-solid fa-ban"></i></div>
+        <div class="mine-name">Hamster Kombat</div>
+        <div class="mine-amount">Not Eligible</div>
+      </div>
+
+      <div class="mine-card reveal ineligible" style="--i:19">
+        <div class="mine-icon"><i class="fa-solid fa-ban"></i></div>
+        <div class="mine-name">Blum</div>
+        <div class="mine-amount">Not Eligible</div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Divider -->
+  <div class="section-divider reveal"><span>Bot Network</span></div>
+
+  <!-- Bots Section -->
+  <section class="bots-section">
+
+    <!-- TeleBotHost -->
+    <div class="platform-block reveal">
+      <div class="platform-header">
+        <i class="fa-brands fa-telegram"></i>
+        <span>TeleBotHost Bots</span>
+      </div>
+
+      <div class="bot-category">
+        <div class="cat-label"><i class="fa-solid fa-wrench"></i> Builder</div>
+        <div class="bot-list">
+          <a href="https://t.me/TBLBuilderBot" target="_blank" class="bot-pill">@TBLBuilderBot</a>
+          <a href="https://t.me/GroupHelper" target="_blank" class="bot-pill">@GroupHelper</a>
+          <a href="https://t.me/BadWordDetractorBot" target="_blank" class="bot-pill">@BadWordDetractorBot</a>
         </div>
-        <div style="margin-left: 1rem; margin-bottom: 0.5rem;">
-            <div style="display: flex; gap: 12px; flex-wrap: wrap; font-size: 0.8rem;"><span>💵 NOTPIXEL $40</span><span>😈 CATTON $6</span></div>
+      </div>
+
+      <div class="bot-category">
+        <div class="cat-label"><i class="fa-solid fa-download"></i> Downloader</div>
+        <div class="bot-list">
+          <a href="https://t.me/NestSaverBot" target="_blank" class="bot-pill">@NestSaverBot <span class="tag">TikTok</span></a>
         </div>
-        <hr>
-        <div class="mining-item" style="opacity:0.8">
-            <div><span class="coin-name">⚠️ TAPSWAP</span></div>
-            <span class="eligible-badge">Not eligible</span>
+      </div>
+
+      <div class="bot-category">
+        <div class="cat-label"><i class="fa-solid fa-money-bill-transfer"></i> Auto Pay</div>
+        <div class="bot-list">
+          <a href="https://t.me/TbhUsdtAutoPayBot" target="_blank" class="bot-pill">@TbhUsdtAutoPayBot <span class="tag">xRocket</span></a>
+          <a href="https://t.me/sendautopaybot" target="_blank" class="bot-pill">@sendautopaybot <span class="tag">CryptoBot</span></a>
+          <a href="https://t.me/toncashpaybot" target="_blank" class="bot-pill">@toncashpaybot <span class="tag">TON</span></a>
         </div>
-        <div class="mining-item" style="opacity:0.8">
-            <div><span class="coin-name">🐹 HAMSTER KOMBAT</span></div>
-            <span class="eligible-badge">Not eligible</span>
+      </div>
+
+      <div class="bot-category">
+        <div class="cat-label"><i class="fa-solid fa-brain"></i> AI &amp; Tools</div>
+        <div class="bot-list">
+          <a href="https://t.me/novaflexaibot" target="_blank" class="bot-pill">@novaflexaibot</a>
         </div>
-        <div class="mining-item" style="opacity:0.8">
-            <div><span class="coin-name">🌐 BLUM</span></div>
-            <span class="eligible-badge">Not eligible</span>
+      </div>
+
+      <div class="bot-category">
+        <div class="cat-label"><i class="fa-solid fa-gift"></i> Rewards</div>
+        <div class="bot-list">
+          <a href="https://t.me/RewardCraftBot" target="_blank" class="bot-pill">@RewardCraftBot</a>
         </div>
-        <div style="margin-top: 12px; font-size: 0.75rem; text-align:right">👑 owner: @arman_rhaman | paid username ✅</div>
+      </div>
+
+      <div class="bot-category">
+        <div class="cat-label"><i class="fa-solid fa-shield-halved"></i> Moderation</div>
+        <div class="bot-list">
+          <a href="https://t.me/MRXLeaveBanBot" target="_blank" class="bot-pill">@MRXLeaveBanBot</a>
+          <a href="https://t.me/roscoscanbot" target="_blank" class="bot-pill">@roscoscanbot</a>
+        </div>
+      </div>
     </div>
 
-    <!-- TELEGRAM CHANNEL + CRYPTO SIGNALS -->
-    <div class="card">
-        <div class="section-title">📡 <span>crypto channel</span></div>
-        <div style="background: #0e131f; border-radius: 28px; padding: 12px; margin-bottom: 12px;">
-            <div style="font-weight: 600;">🔹 @seemrbio — buy/sell signals</div>
-            <div style="font-size:0.8rem; opacity:0.8;">✔️ realtime crypto calls | spot & futures</div>
+    <!-- Bot Business Bots -->
+    <div class="platform-block reveal">
+      <div class="platform-header">
+        <i class="fa-solid fa-briefcase"></i>
+        <span>Bot Business Bots</span>
+      </div>
+
+      <div class="bot-category">
+        <div class="cat-label"><i class="fa-solid fa-hammer"></i> BB Creator</div>
+        <div class="bot-list">
+          <a href="https://t.me/mrcreatorxbot" target="_blank" class="bot-pill">@mrcreatorxbot</a>
         </div>
-        <div class="bot-grid" style="justify-content:flex-start;">
-            <div class="badge">🟢 direct deals: @arman_rhaman</div>
+      </div>
+
+      <div class="bot-category">
+        <div class="cat-label"><i class="fa-solid fa-bullhorn"></i> Task &amp; Ads</div>
+        <div class="bot-list">
+          <a href="https://t.me/TheEarnCoreBot" target="_blank" class="bot-pill">@TheEarnCoreBot</a>
         </div>
+      </div>
+
+      <div class="bot-category">
+        <div class="cat-label"><i class="fa-solid fa-heart"></i> Reactor</div>
+        <div class="bot-list">
+          <a href="https://t.me/ARAutoReactorBot" target="_blank" class="bot-pill">@ARAutoReactorBot</a>
+        </div>
+      </div>
+
+      <div class="bot-category">
+        <div class="cat-label"><i class="fa-solid fa-credit-card"></i> Payments</div>
+        <div class="bot-list">
+          <a href="https://t.me/bbxrocektbot" target="_blank" class="bot-pill">@bbxrocektbot</a>
+          <a href="https://t.me/xrockettestautopaybot" target="_blank" class="bot-pill">@xrockettestautopaybot</a>
+        </div>
+      </div>
+
+      <div class="bot-category">
+        <div class="cat-label"><i class="fa-solid fa-folder"></i> File</div>
+        <div class="bot-list">
+          <a href="https://t.me/mrfilearchivebot" target="_blank" class="bot-pill">@mrfilearchivebot</a>
+        </div>
+      </div>
+
+      <div class="bot-category">
+        <div class="cat-label"><i class="fa-solid fa-wallet"></i> Wallet</div>
+        <div class="bot-list">
+          <a href="https://t.me/mrXwalletbot" target="_blank" class="bot-pill">@mrXwalletbot</a>
+        </div>
+      </div>
+
+      <div class="bot-category">
+        <div class="cat-label"><i class="fa-solid fa-dice"></i> Casino</div>
+        <div class="bot-list">
+          <a href="https://t.me/BetsWin99Bot" target="_blank" class="bot-pill">@BetsWin99Bot</a>
+          <a href="https://t.me/jackpotcasinoearnbot" target="_blank" class="bot-pill">@jackpotcasinoearnbot</a>
+        </div>
+      </div>
+
+      <div class="bot-category">
+        <div class="cat-label"><i class="fa-solid fa-pickaxe"></i> Mining</div>
+        <div class="bot-list">
+          <a href="https://t.me/TRX_Auto_Minerv2Bot" target="_blank" class="bot-pill">@TRX_Auto_Minerv2Bot</a>
+        </div>
+      </div>
+
+      <div class="bot-category">
+        <div class="cat-label"><i class="fa-solid fa-link"></i> Refer &amp; Earn</div>
+        <div class="bot-list">
+          <a href="https://t.me/refearnmoneybot" target="_blank" class="bot-pill">@refearnmoneybot</a>
+          <a href="https://t.me/refearnmoneyv2bot" target="_blank" class="bot-pill">@refearnmoneyv2bot</a>
+          <a href="https://t.me/StarlanceBot" target="_blank" class="bot-pill">@StarlanceBot</a>
+          <a href="https://t.me/bkashautopay100bot" target="_blank" class="bot-pill">@bkashautopay100bot</a>
+        </div>
+      </div>
+
+      <div class="bot-category">
+        <div class="cat-label"><i class="fa-solid fa-cart-shopping"></i> Marketplace</div>
+        <div class="bot-list">
+          <a href="https://t.me/tg_buy1bot" target="_blank" class="bot-pill">@tg_buy1bot</a>
+          <a href="https://t.me/tg_sell1bot" target="_blank" class="bot-pill">@tg_sell1bot</a>
+          <a href="https://t.me/BUY_SOCIAL_OTPbot" target="_blank" class="bot-pill">@BUY_SOCIAL_OTPbot</a>
+        </div>
+      </div>
+
+      <div class="bot-category">
+        <div class="cat-label"><i class="fa-solid fa-screwdriver-wrench"></i> Tools</div>
+        <div class="bot-list">
+          <a href="https://t.me/UltraMailGenBot" target="_blank" class="bot-pill">@UltraMailGenBot</a>
+          <a href="https://t.me/qrcmkerbot" target="_blank" class="bot-pill">@qrcmkerbot</a>
+          <a href="https://t.me/StylishFontTextChnagerBot" target="_blank" class="bot-pill">@StylishFontTextChnagerBot</a>
+          <a href="https://t.me/stepcalcbot" target="_blank" class="bot-pill">@stepcalcbot</a>
+        </div>
+      </div>
     </div>
 
-    <!-- SHOWCASE: minimal tools -->
-    <div class="card">
-        <div class="section-title">🛠️ <span>bot arsenal</span></div>
-        <div style="display: flex; flex-wrap: wrap; gap: 8px; margin: 6px 0;">
-            <span class="badge">✍️ Stylish Font</span>
-            <span class="badge">🚫 Badword Detector</span>
-            <span class="badge">🧹 Group Cleaner</span>
-            <span class="badge">📱 WhatsApp Linker</span>
-            <span class="badge">📧 Temp Mail Gen</span>
-            <span class="badge">🎲 Gambling Calc</span>
-            <span class="badge">📷 QR Generator</span>
-            <span class="badge">⛔ MRX Leave (auto ban)</span>
-            <span class="badge">❤️ Channel Auto Reactor</span>
-            <span class="badge">🎁 Reward Craft</span>
-            <span class="badge">🧮 Calculator</span>
-        </div>
-    </div>
+  </section>
 
-    <!-- 🤖 5 main BOTS – clickable (only these 5 appear) -->
-    <div class="card">
-        <div class="section-title">🤖 <span>featured bots</span> <span class="mini-tag">tap to open</span></div>
-        <div class="bot-grid">
-            <a href="https://t.me/mrXwalletbot" target="_blank" rel="noopener noreferrer" class="bot-link">💼 @mrXwalletbot</a>
-            <a href="https://t.me/mrcreatorxbot" target="_blank" rel="noopener noreferrer" class="bot-link">🎨 @mrcreatorxbot</a>
-            <a href="https://t.me/TBLBuilderBot" target="_blank" rel="noopener noreferrer" class="bot-link">🛠️ @TBLBuilderBot</a>
-            <a href="https://t.me/NestSaverBot" target="_blank" rel="noopener noreferrer" class="bot-link">⬇️ @NestSaverBot</a>
-            <a href="https://t.me/RewardCraftBot" target="_blank" rel="noopener noreferrer" class="bot-link">🎁 @RewardCraftBot</a>
-        </div>
-        <div style="font-size: 0.7rem; text-align: center; margin-top: 14px; opacity:0.6;">
-            ✅ each bot opens in Telegram — tap to interact
-        </div>
-    </div>
+  <!-- Footer -->
+  <footer class="footer reveal">
+    <p class="footer-quote">My enemies are many. My equals are none.</p>
+    <p class="footer-faith">In Allah We Trust</p>
+    <p class="footer-handle">@arman_rhaman</p>
+  </footer>
 
-    <!-- SOCIAL MEDIA LINKS (full list but minimal style) -->
-    <div class="card">
-        <div class="section-title">🌐 <span>connect with arman</span></div>
-        <div class="social-row">
-            <a href="https://www.facebook.com/arman.n.n.a.a" class="social-icon" target="_blank">📘 FB</a>
-            <a href="https://t.me/arman_rhaman" class="social-icon" target="_blank">✈️ Telegram</a>
-            <a href="https://t.me/seemrbio" class="social-icon" target="_blank">📢 Channel</a>
-            <a href="https://api.whatsapp.com/send?phone=+8801409542658" class="social-icon" target="_blank">💬 WA</a>
-            <a href="https://www.instagram.com/mr_arman_rhaman" class="social-icon" target="_blank">📸 IG</a>
-            <a href="https://www.threads.com/@mr_arman_rhaman" class="social-icon" target="_blank">🧵 Threads</a>
-            <a href="https://x.com/arman_rhaman" class="social-icon" target="_blank">🐦 X</a>
-            <a href="https://www.tiktok.com/@arman_rhaman" class="social-icon" target="_blank">🎵 TikTok</a>
-        </div>
-    </div>
-
-    <!-- QUOTE + Footer -->
-    <div class="footer-quote">
-        ⚡ My enemies are many, my equals are none. In Allah we trust 🗽 <br>
-        🔥 mining empire | @arman_rhaman — the real bot architect
-    </div>
-</div>
-
-<script>
-    // smooth open links in Telegram webview / browser works fine
-    // interactive feedback on bot links already handled by CSS :active
-    console.log("%c🔥 ARMAN MINER • BOT COLLECTION 🔥", "color:#f0b90b; font-size:14px");
-    // optional copy / no extra icons, just clean mobile design
-</script>
+  <script src="script.js"></script>
 </body>
 </html>
